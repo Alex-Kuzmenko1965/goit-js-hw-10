@@ -1,11 +1,11 @@
 {
-  "name": "goit-js-10",
+  "name": "goit-js-hw-10",
   "version": "2.0.0",
   "description": "",
   "homepage": "https://github.com/Alex-Kuzmenko1965/goit-js-hw-10",
   "scripts": {
     "start": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /goit-js-10/"
+    "build": "parcel build src/*.html --public-url /goit-js-hw-10/"
   },
   "repository": {
     "type": "git",
