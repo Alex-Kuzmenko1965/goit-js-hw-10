@@ -46,8 +46,7 @@ function onEventInput(e) {
         updateNewsList(markup);}      
     })
     // .catch((err) => onError(err))
-    .catch(onError);
-    // .finally(() => inputEvent.reset());
+    .catch(onError);    
 }
 
 function createMarkupInfo({ name, capital, population,flags, languages }) {  
@@ -61,7 +60,7 @@ function createMarkupInfo({ name, capital, population,flags, languages }) {
     <p><b>Capital:</b> ${capital || "No capital"}</p>
     <p><b>Population:</b> ${population || "No population"}</p>
     <p><b>Languages:</b> ${(Object.values(languages)).join(' ') || "No languages"}</p>`;
-}
+};
 
 function createMarkupList({ name, flags }) {  
   return `
@@ -69,20 +68,20 @@ function createMarkupList({ name, flags }) {
     <li><img src=${flags.svg || "No flags"} width="30"></li>
     <li><h2 style="margin: 0">${name.official || "No name"}</h2></li>
   </ul></li>`;
-}
+};
 
 function updateNewsInfo(markup) {
   countryList.innerHTML = "";
   countryInfo.innerHTML = markup;
-}
+};
 
 function updateNewsList(markup) {
   countryInfo.innerHTML = "";
   countryList.innerHTML = markup;
-}
+};
 
 function onError(err) {
   Notiflix.Notify.failure('Oops, there is no country with that name');
   countryInfo.innerHTML = "";
   countryList.innerHTML = "";
-}
+};
