@@ -6,7 +6,7 @@ const DEBOUNCE_DELAY = 300;
 
 import { fetchCountries } from "./js/fetchCountries.js";
 
-inputEvent = document.getElementById("search-box");
+inputEvent = document.querySelector("input#search-box");
 console.dir(inputEvent);
 countryList = document.querySelector(".country-list");
 console.log(countryList);
