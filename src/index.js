@@ -21,35 +21,65 @@ refs.inputEvent.addEventListener("input", debounce(onEventInput, DEBOUNCE_DELAY,
 }));
 // refs.inputEvent.addEventListener("input", onEventInput);
 
-function onEventInput(e) {  
+// === 1-й варіант - ".then().catch()" ===
+
+// function onEventInput(e) {  
+//   const inputValue = (e.currentTarget.value).trim();
+//   console.log(inputValue); 
+//   fetchCountries(inputValue)
+//     .then((data) => {
+//       console.log(data);        
+//       if (data.length === 1) {
+//         const markup = data.reduce(
+//           (markup, data) => markup + createMarkupInfo(data), "");
+//         console.log(markup);
+//         updateNewsInfo(markup);
+//       } else 
+//       if (data.length > 10) {
+//         Notiflix.Notify.info('Too many matches found. Please enter a more specific name');
+//         refs.countryList.innerHTML = "";
+//         refs.countryInfo.innerHTML = "";
+//         return;
+//       } else {
+//         refs.countryList.setAttribute('style', 'padding: 0');       
+//         const markup = data.reduce(
+//           (markup, data) => markup + createMarkupList(data), "");
+//         console.log(markup);
+//         updateNewsList(markup);}      
+//     })    
+//     .catch(onError);    
+// }
+
+// === 2-й варіант - "async/await" ===
+
+async function onEventInput(e) {  
   // console.log(e.currentTarget.value);
   // console.log((e.currentTarget.value).trim());
   const inputValue = (e.currentTarget.value).trim();
-  console.log(inputValue); 
-  fetchCountries(inputValue)
-    .then((data) => {
-      // console.log(data);        
-      if (data.length === 1) {
-        const markup = data.reduce(
-          (markup, data) => markup + createMarkupInfo(data), "");
+  // console.log(inputValue); 
+  const country = await fetchCountries(inputValue);
+    try {
+      // console.log(country);        
+      if (country.length === 1) {
+        const markup = country.reduce(
+          (markup, country) => markup + createMarkupInfo(country), "");
         console.log(markup);
         updateNewsInfo(markup);
       } else 
-      if (data.length > 10) {
+      if (country.length > 10) {
         Notiflix.Notify.info('Too many matches found. Please enter a more specific name');
         refs.countryList.innerHTML = "";
         refs.countryInfo.innerHTML = "";
         return;
       } else {
         refs.countryList.setAttribute('style', 'padding: 0');       
-        const markup = data.reduce(
-          (markup, data) => markup + createMarkupList(data), "");
+        const markup = country.reduce(
+          (markup, country) => markup + createMarkupList(country), "");
         console.log(markup);
         updateNewsList(markup);}      
-    })
-    // .catch((err) => onError(err))
-    .catch(onError);    
+    } catch (error) {onError()}  
 }
+
 
 function createMarkupInfo({ name, capital, population,flags, languages }) {  
   // console.log(Object.values(languages));  
